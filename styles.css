@@ -48,6 +48,11 @@ body{
     overflow: hidden;
     background-color: #fff;
 }
+.income_position,
+.graph_container {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
 
 .important_txt{
     color: var(--third);
