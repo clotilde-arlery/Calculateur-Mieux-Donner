@@ -455,7 +455,7 @@ function App(triggeringEvent){
     let emissionMoy_fce = 4.46; //emission moyenne d'un francais en tonnes 
 
     let don_moustiquaire = donationPreTax/prixUnitaire_moustiquaire ; // nombre de moustiquaires pouvant être financer
-    let don_vieSauvee = donationPreTax/moustiquaire_personnesprotegees; // nombre de personne protégées
+    let don_vieSauvee = donationPreTax*moustiquaire_personnesprotegees; // nombre de personne protégées
     let don_animauxepargne = donationPreTax*Unitaire_animauxepargne; // nombre d'animaux épargnés
     let don_CO2 = donationPreTax/Unitaire_CO2; // nombre de tonnes évitées
     let don_emissionMoy_fce = don_CO2/emissionMoy_fce; 
@@ -470,7 +470,7 @@ function App(triggeringEvent){
     console.log(don_moustiquaire);
     console.log(formatNumber(don_moustiquaire, roundToUnit=true));
     txt_prixUnitaire_moustiquaire.innerHTML = formatNumber(don_moustiquaire, roundToUnit=true);
-    txt_moustiquaire_personnesprotegees.innerHTML = formatNumber(don_vieSauvee);
+    txt_moustiquaire_personnesprotegees.innerHTML = Math.round(don_vieSauvee);
     txt_Unitaire_animauxepargne.innerHTML = formatNumber(don_animauxepargne, roundToUnit=true);
     txt_Unitaire_CO2.innerHTML = formatNumber(don_CO2, roundToUnit=true);
     txt_emissionMoy_fce.innerHTML = formatNumber(don_emissionMoy_fce, roundToUnit=true);
