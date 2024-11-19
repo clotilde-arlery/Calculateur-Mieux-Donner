@@ -449,29 +449,29 @@ function App(triggeringEvent){
         formatNumber(donationPostTax, roundToUnit=true) + "€";
     
     let prixUnitaire_moustiquaire = 4.49; // cout d'une moustiquaire en euros
-    let moustiquaire_vieSauvee = 6327.59; // coût moyen par vie sauvée
-    let Unitaire_vieEnCage = 0.11; // cout pour une année de vie en cage évitée
-    let Unitaire_CO2 = 10; //cout d'une tonne évitée en euros;
+    let moustiquaire_personnesprotegees = 1.134 // nombre de personne protégées
+    let Unitaire_animauxepargne = 5.3; // nombre d'animaux épargnés
+    let Unitaire_CO2 = 1; //cout d'une tonne évitée en euros;
     let emissionMoy_fce = 4.46; //emission moyenne d'un francais en tonnes 
 
     let don_moustiquaire = donationPreTax/prixUnitaire_moustiquaire ; // nombre de moustiquaires pouvant être financer
-    let don_vieSauvee = donationPreTax/moustiquaire_vieSauvee; // nombre de vie sauvée
-    let don_vieEnCage = donationPreTax/Unitaire_vieEnCage; // nombre d'années de vie en cage évitées
+    let don_vieSauvee = donationPreTax/moustiquaire_personnesprotegees; // nombre de personne protégées
+    let don_vieEnCage = donationPreTax*Unitaire_animauxepargne; // nombre d'animaux épargnés
     let don_CO2 = donationPreTax/Unitaire_CO2; // nombre de tonnes évitées
     let don_emissionMoy_fce = don_CO2/emissionMoy_fce; 
 
     
     let txt_prixUnitaire_moustiquaire = document.getElementById("txt_prixUnitaire_moustiquaire");
-    let txt_moustiquaire_vieSauvee = document.getElementById("txt_moustiquaire_vieSauvee");
-    let txt_Unitaire_vieEnCage = document.getElementById("txt_Unitaire_vieEnCage");
+    let txt_moustiquaire_personnesprotegees = document.getElementById("txt_moustiquaire_personnesprotegees");
+    let txt_Unitaire__animauxepargne = document.getElementById("txt_Unitaire_animauxepargne");
     let txt_Unitaire_CO2 = document.getElementById("txt_Unitaire_CO2");
     let txt_emissionMoy_fce = document.getElementById("txt_emissionMoy_fce");
 
     console.log(don_moustiquaire);
     console.log(formatNumber(don_moustiquaire, roundToUnit=true));
     txt_prixUnitaire_moustiquaire.innerHTML = formatNumber(don_moustiquaire, roundToUnit=true);
-    txt_moustiquaire_vieSauvee.innerHTML = formatNumber(don_vieSauvee);
-    txt_Unitaire_vieEnCage.innerHTML = formatNumber(don_vieEnCage, roundToUnit=true);
+    txt_moustiquaire_personnesprotegees.innerHTML = formatNumber(don_vieSauvee);
+    txt_Unitaire_animauxepargne.innerHTML = formatNumber(don_vieEnCage, roundToUnit=true);
     txt_Unitaire_CO2.innerHTML = formatNumber(don_CO2, roundToUnit=true);
     txt_emissionMoy_fce.innerHTML = formatNumber(don_emissionMoy_fce, roundToUnit=true);
 
