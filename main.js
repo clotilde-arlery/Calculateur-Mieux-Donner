@@ -448,7 +448,7 @@ function App(triggeringEvent){
     txt_amountDonDefisc.innerHTML =
         formatNumber(donationPostTax, roundToUnit=true) + "€";
     
-    let prixUnitaire_moustiquaire = 4.49; // cout d'une moustiquaire en euros
+    let prixUnitaire_moustiquaire = 5; // cout d'une moustiquaire en euros
     let moustiquaire_personnesprotegees = 1.134 // nombre de personne protégées
     let Unitaire_animauxepargne = 5.3; // nombre d'animaux épargnés
     let Unitaire_CO2 = 1; //cout d'une tonne évitée en euros;
