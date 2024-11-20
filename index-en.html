@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Income comparator</title>
+    <title>Income Comparator</title>
 
     <link rel="stylesheet" href="styles.css"/>
     <script src="data.js" defer></script>
@@ -14,122 +14,107 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-
 </head>
 <body>
     
 <div id="containerHRAI">
 
     <section class="banner">
-
-        <h1>Income comparator</h1>
-    
+        <h1>Income Comparator</h1>
     </section>
     
     <section class="userSituation" id="userSituation">
-    
-        <h2 class="subject">Vous êtes probablement plus riche que vous ne le pensez faites le test !</h2>
+        <h2 class="subject">You’re probably richer than you think – take the test!</h2>
     
         <form id="initialForm">
-            <!-- <div class="income_input_container"> -->
-                <div class="form__group">
-                    
-                    <input 
+            <div class="form__group">
+                <input 
+                    type="number"
+                    class="form__field"
+                    placeholder=" "
+                    name="income"
+                    id='income'
+                    required
+                    title=""
+                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                />
+                <span class="devise">€</span>
+                <label for="income" class="form__label">Income</label>
+    
+                <div class="income_period">
+                    <p>Household income <span id="container_dropdownperiod"><span id="income_period"></span><span class="material-symbols-outlined arrow_period">
+                        expand_more
+                        </span></span> before taxes
+                        <span id="anim">
+                            <span class="tooltip" data-tooltip="Include: net salaries before taxes, pensions, unemployment benefits, rental income, dividends, and interest earned.">?</span>
+                        </span>
+                    </p>
+                    <div class="income_period_dropdown" id="income_period_dropdown">
+                        <div>
+                            <input type="radio" id="annual" name="period" value="annual" checked>
+                            <label for="annual" id="annual_label" class="annual">Annual</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="monthly" name="period" value="monthly">
+                            <label for="monthly" id="monthly_label" class="monthly">Monthly</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="split_form_group">
+                <div class="relative_famille">
+                    <p class="field_desc">People aged 14 or older</p>
+                    <input
                         type="number"
-                        class="form__field"
-                        placeholder=" "
-                        name="income"
-                        id='income'
+                        class="nb_adult"
+                        placeholder="1"
+                        name="adult"
+                        id='nb_adult'
                         required
                         title=""
                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                     />
-                    <span class="devise">€</span>
-                    <label for="income" class="form__label">Revenu</label>
-    
-                    
-                    <div class="income_period">
-                        <p>Revenu <span id="container_dropdownperiod"><span id="income_period"></span><span class="material-symbols-outlined arrow_period">
-                            expand_more
-                            </span></span> du ménage avant impôts 
-                            
-                            <span id="anim">
-                                <span class="tooltip" data-tooltip="A inclure : salaires nets avant impôts, retraite, chômage, rentes immobilières, dividendes, intérêts perçus.">?</span>
-                            </span>
-
-                                </p>
-                        <div class="income_period_dropdown" id="income_period_dropdown">
-                            <div>
-                                <input type="radio" id="annuel" name="period" value="annuel" checked>
-                                <label for="annuel" id="annuel_label" class="annuel">annuel</label>
-                            </div>
-                          
-                            <div>
-                                <input type="radio" id="mensuel" name="period" value="mensuel">
-                                <label for="mensuel" id="mensuel_label" class="mensuel">mensuel</label>
-                            </div>
-                        </div>
-                          
-                    </div>
+                    <label for="nb_adult" class="nb_adult_label">Adults</label>
                 </div>
-                <div class="split_form_group">
-                    <div class="relative_famille">
-                        <p class="field_desc">Personnes de 14 ans ou plus</p>
-                        <input
-                            type="number"
-                            class="nb_adult"
-                            placeholder="1"
-                            name="adult"
-                            id='nb_adult'
-                            required
-                            title=""
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                        />
-                        <label for="nb_adult" class="nb_adult_label">Adultes</label>
-                    </div>
-                    <div class="relative_famille">
-                        <p class="field_desc">Personnes de moins de 14 ans</p>
-                        <input
-                            type="number"
-                            class="nb_children"
-                            placeholder="0"
-                            name="children"
-                            id='nb_children'
-                            required
-                            title=""
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                        />
-                        <label for="nb_children" class="nb_children_label">Enfants</label>
-                    </div>
+                <div class="relative_famille">
+                    <p class="field_desc">People under 14 years old</p>
+                    <input
+                        type="number"
+                        class="nb_children"
+                        placeholder="0"
+                        name="children"
+                        id='nb_children'
+                        required
+                        title=""
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                    />
+                    <label for="nb_children" class="nb_children_label">Children</label>
                 </div>
-    
-            <input id="calculer" type="button" value="Calculer">
-    
+            </div>
+            <input id="calculer" type="button" value="Calculate">
         </form>
-        
     </section>
 
     <div id="containerApp">
         <section class="income_position">
             <h2 class="subject">
-                Avec un revenu de
+                With an income of
                 <span id="txt_revenu" class="important_txt">
                     x€
                 </span>
-                par 
+                per 
                 <span id="txt_period">
-                    an
+                    year
                 </span><span id="txt_pourN">
-                    pour 
+                    for 
                     <span id="txt_nbMenage" class="important_txt">
                         n</span></span>,
-                <!-- </span> closed on previous line to avoid extra space -->
                 <br>
-                vous êtes parmi les
+                you are among the
                 <span class="important_txt positionPercent">
                     y%
                 </span>
-                les plus riches du monde.
+                richest people in the world.
             </h2>        
 
             <div id="graph_container" class="graph_container">
@@ -138,12 +123,12 @@
                         arrow_upward
                     </span>
                     <p class="txt_poorer_position">
-                        Personnes moins riches que vous
+                        People poorer than you
                     </p>
                 </div>
                 <div id="income_position_bar" class="income_position_bar">
                     <div class="your_position">
-                        <p class="txt_your_position">Vous</p>
+                        <p class="txt_your_position">You</p>
                         <span class="material-symbols-outlined your_arrow">
                             arrow_downward
                         </span>
@@ -151,6 +136,7 @@
                 </div>
             </div>
         </section>
+
         <section class="median_income">
 
             <h2 class="subject">Vous gagnez chaque année <span id="timesRevenuMedian" class="important_txt"></span> le revenu médian,<br>
@@ -337,7 +323,7 @@
                 Some charities allow you to reduce a portion of your donations from your income taxes. 
                 The figures in yellow correspond to the case where you use the tax reduction. The figures in blue do not account for this advantage. 
                 These figures are estimates. Learn more about 
-                <a href="https://mieuxdonner.org/reduction-fiscale-des-dons-aux-associations/" target="_blank" rel="noopener noreferrer">tax reductions</a>.
+                <a href="https://mieuxdonner.org/tax-reduction-for-donations-to-charities/" target="_blank" rel="noopener noreferrer">tax reductions</a>.
             </li>
             <li id="note2" style="margin-bottom: 10px;">
                 According to an estimate by 
