@@ -3,6 +3,22 @@
     margin: 0;
 }
 
+@media only screen and (max-width: 768px) {
+    html, body {
+        margin: 0;
+        padding: 0;
+        width: 100vw; /* Prend toute la largeur de l’écran */
+        overflow-x: hidden; /* Supprime les barres de défilement horizontales */
+    }
+
+    iframe {
+        width: 100vw !important;
+        height: auto;
+        max-width: 100% !important;
+    }
+}
+
+
 html{
     box-sizing: border-box;
 }
