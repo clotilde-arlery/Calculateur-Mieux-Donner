@@ -19,147 +19,143 @@
     
 <div id="containerHRAI">
 
-    <section class="banner">
-        <h1>Income Comparator</h1>
-    </section>
-    
-    <section class="userSituation" id="userSituation">
-        <h2 class="subject">You’re probably richer than you think – take the test!</h2>
-    
-        <form id="initialForm">
-            <div class="form__group">
-                <input 
+ <section class="banner">
+    <h1>Income Comparator</h1>
+</section>
+
+<section class="userSituation" id="userSituation">
+    <h2 class="subject">You are probably wealthier than you think. Take the test!</h2>
+
+    <form id="initialForm">
+        <div class="form__group">
+            <input 
+                type="number"
+                class="form__field"
+                placeholder=" "
+                name="income"
+                id="income"
+                required
+                title=""
+                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+            />
+            <span class="devise">€</span>
+            <label for="income" class="form__label">Income</label>
+
+            <div class="income_period">
+                <p>Household income <span id="container_dropdownperiod"><span id="income_period"></span><span class="material-symbols-outlined arrow_period">
+                    expand_more
+                    </span></span> before taxes
+                    <span id="anim">
+                        <span class="tooltip" data-tooltip="Include: net salaries before taxes, pensions, unemployment benefits, rental income, dividends, received interests.">?</span>
+                    </span>
+                </p>
+                <div class="income_period_dropdown" id="income_period_dropdown">
+                    <div>
+                        <input type="radio" id="annuel" name="period" value="annuel" checked>
+                        <label for="annuel" id="annuel_label" class="annuel">annual</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="mensuel" name="period" value="mensuel">
+                        <label for="mensuel" id="mensuel_label" class="mensuel">monthly</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="split_form_group">
+            <div class="relative_famille">
+                <p class="field_desc">People aged 14 and over</p>
+                <input
                     type="number"
-                    class="form__field"
-                    placeholder=" "
-                    name="income"
-                    id='income'
+                    class="nb_adult"
+                    placeholder="1"
+                    name="adult"
+                    id="nb_adult"
                     required
                     title=""
                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                 />
-                <span class="devise">€</span>
-                <label for="income" class="form__label">Income</label>
-    
-                <div class="income_period">
-                    <p>Household income <span id="container_dropdownperiod"><span id="income_period"></span><span class="material-symbols-outlined arrow_period">
-                        expand_more
-                        </span></span> before taxes
-                        <span id="anim">
-                            <span class="tooltip" data-tooltip="Include: net salaries before taxes, pensions, unemployment benefits, rental income, dividends, and interest earned.">?</span>
-                        </span>
-                    </p>
-                    <div class="income_period_dropdown" id="income_period_dropdown">
-                        <div>
-                            <input type="radio" id="annual" name="period" value="annual" checked>
-                            <label for="annual" id="annual_label" class="annual">Annual</label>
-                        </div>
-                        <div>
-                            <input type="radio" id="monthly" name="period" value="monthly">
-                            <label for="monthly" id="monthly_label" class="monthly">Monthly</label>
-                        </div>
-                    </div>
-                </div>
+                <label for="nb_adult" class="nb_adult_label">Adults</label>
             </div>
-            <div class="split_form_group">
-                <div class="relative_famille">
-                    <p class="field_desc">People aged 14 or older</p>
-                    <input
-                        type="number"
-                        class="nb_adult"
-                        placeholder="1"
-                        name="adult"
-                        id='nb_adult'
-                        required
-                        title=""
-                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                    />
-                    <label for="nb_adult" class="nb_adult_label">Adults</label>
-                </div>
-                <div class="relative_famille">
-                    <p class="field_desc">People under 14 years old</p>
-                    <input
-                        type="number"
-                        class="nb_children"
-                        placeholder="0"
-                        name="children"
-                        id='nb_children'
-                        required
-                        title=""
-                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                    />
-                    <label for="nb_children" class="nb_children_label">Children</label>
-                </div>
+            <div class="relative_famille">
+                <p class="field_desc">People under 14</p>
+                <input
+                    type="number"
+                    class="nb_children"
+                    placeholder="0"
+                    name="children"
+                    id="nb_children"
+                    required
+                    title=""
+                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                />
+                <label for="nb_children" class="nb_children_label">Children</label>
             </div>
-            <input id="calculer" type="button" value="Calculate">
-        </form>
-    </section>
-
-    <div id="containerApp">
-        <section class="income_position">
-            <h2 class="subject">
-                With an income of
-                <span id="txt_revenu" class="important_txt">
-                    x€
-                </span>
-                per 
-                <span id="txt_period">
-                    year
-                </span><span id="txt_pourN">
-                    for 
-                    <span id="txt_nbMenage" class="important_txt">
-                        n</span></span>,
-                <br>
-                you are among the
-                <span class="important_txt positionPercent">
-                    y%
-                </span>
-                richest people in the world.
-            </h2>        
-
-            <div id="graph_container" class="graph_container">
-                <div class="poorer_position" id="poorer_position">
-                    <span class="material-symbols-outlined poor_arrow">
-                        arrow_upward
-                    </span>
-                    <p class="txt_poorer_position">
-                        People poorer than you
-                    </p>
-                </div>
-                <div id="income_position_bar" class="income_position_bar">
-                    <div class="your_position">
-                        <p class="txt_your_position">You</p>
-                        <span class="material-symbols-outlined your_arrow">
-                            arrow_downward
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-<section class="median_income">
-
-    <h2 class="subject">You earn each year <span id="timesRevenuMedian" class="important_txt"></span> the median income,<br>
-        and <span id="times10poorest" class="important_txt"></span> the income of someone in the bottom 10%.</h2>
-
-    <div class="compare_GraphContainer">
-
-        <div class="compare_barContainer">
-            <div id="compare_barYou" class="compare_barYou"></div>
-            <p class="compare_txt">Your income</p>
-        </div>
-        <div class="compare_barContainer">
-            <div id="compare_barMedian" class="compare_barMedian"></div>
-            <p class="compare_txt">Median income</p>
-        </div>
-        <div class="compare_barContainer">
-            <div id="compare_barPoor" class="compare_barPoor"></div>
-            <p class="compare_txt">Highest income of the bottom 10%</p>
         </div>
 
-    </div>
-
+        <input id="calculer" type="button" value="Calculate">
+    </form>
 </section>
+
+<div id="containerApp">
+    <section class="income_position">
+        <h2 class="subject">
+            With an income of 
+            <span id="txt_revenu" class="important_txt">
+                x€
+            </span>
+            per 
+            <span id="txt_period">
+                year
+            </span><span id="txt_pourN">
+                for 
+                <span id="txt_nbMenage" class="important_txt">
+                    n</span></span>,
+            <br>
+            you are among the 
+            <span class="important_txt positionPercent">
+                y%
+            </span>
+            wealthiest people in the world.
+        </h2>        
+
+        <div id="graph_container" class="graph_container">
+            <div class="poorer_position" id="poorer_position">
+                <span class="material-symbols-outlined poor_arrow">
+                    arrow_upward
+                </span>
+                <p class="txt_poorer_position">
+                    People less wealthy than you
+                </p>
+            </div>
+            <div id="income_position_bar" class="income_position_bar">
+                <div class="your_position">
+                    <p class="txt_your_position">You</p>
+                    <span class="material-symbols-outlined your_arrow">
+                        arrow_downward
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="median_income">
+        <h2 class="subject">Each year, you earn <span id="timesRevenuMedian" class="important_txt"></span> the median income, <br>
+            and <span id="times10poorest" class="important_txt"></span> the income of someone in the poorest 10%.</h2>
+
+        <div class="compare_GraphContainer">
+            <div class="compare_barContainer">
+                <div id="compare_barYou" class="compare_barYou"></div>
+                <p class="compare_txt">Your income</p>
+            </div>
+            <div class="compare_barContainer">
+                <div id="compare_barMedian" class="compare_barMedian"></div>
+                <p class="compare_txt">Median income</p>
+            </div>
+            <div class="compare_barContainer">
+                <div id="compare_barPoor" class="compare_barPoor"></div>
+                <p class="compare_txt">Highest income of the poorest 10%</p>
+            </div>
+        </div>
+    </section>
 
 <section class="donner" id="donner">
 
