@@ -137,132 +137,135 @@
             </div>
         </section>
 
-        <section class="median_income">
+<section class="median_income">
 
-            <h2 class="subject">Vous gagnez chaque année <span id="timesRevenuMedian" class="important_txt"></span> le revenu médian,<br>
-                et <span id="times10poorest" class="important_txt"></span> le revenu de quelqu’un qui fait partie des 10% les plus pauvres.</h2>
+    <h2 class="subject">You earn each year <span id="timesRevenuMedian" class="important_txt"></span> the median income,<br>
+        and <span id="times10poorest" class="important_txt"></span> the income of someone in the bottom 10%.</h2>
 
-            <div class="compare_GraphContainer">
+    <div class="compare_GraphContainer">
 
-                <div class="compare_barContainer">
-                    <div id="compare_barYou" class="compare_barYou"></div>
-                    <p class="compare_txt">Votre revenu</p>
-                </div>
-                <div class="compare_barContainer">
-                    <div id="compare_barMedian" class="compare_barMedian"></div>
-                    <p class="compare_txt">Le revenu médian</p>
-                </div>
-                <div class="compare_barContainer">
-                    <div id="compare_barPoor" class="compare_barPoor"></div>
-                    <p class="compare_txt">Le plus haut revenu des 10% les plus pauvres</p>
-                </div>
+        <div class="compare_barContainer">
+            <div id="compare_barYou" class="compare_barYou"></div>
+            <p class="compare_txt">Your income</p>
+        </div>
+        <div class="compare_barContainer">
+            <div id="compare_barMedian" class="compare_barMedian"></div>
+            <p class="compare_txt">Median income</p>
+        </div>
+        <div class="compare_barContainer">
+            <div id="compare_barPoor" class="compare_barPoor"></div>
+            <p class="compare_txt">Highest income of the bottom 10%</p>
+        </div>
 
+    </div>
+
+</section>
+
+<section class="donner" id="donner">
+
+    <h2 class="subject">By donating <span id="txt_postTaxDonation" class="important_txt">23%</span> of your income, <br>or <span id="txt_preTaxDonation" class="don_real">10%</span> after tax deductions<a href="#notes" class="footNote">1</a>...</h2>
+    
+    <div id="range_input" class="range_input">
+        <input type="range" name="preTaxSlider" id="preTaxSlider" min="1" max="50" value="10" step="1">
+        <input type="range" name="postTaxSlider" id="postTaxSlider" min="1" max="50" value="5" step="1">
+        <ul class="legend">
+            <li>1%</li>
+            <li>10%</li>
+            <li>20%</li>
+            <li>30%</li>
+            <li>40%</li>
+            <li>50%</li>
+        </ul>
+        <svg role="presentation" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <rect  x="1.7%" ></rect>
+            <rect  x="19.4%"></rect>
+            <rect  x="39%"  ></rect>
+            <rect  x="58.7%"></rect>
+            <rect  x="78.6%"></rect>
+            <rect  x="98.3%"></rect>
+        </svg>
+    </div>
+
+    <h2 class="subject">...you would still be among the <span id="positionPostDon" class="important_txt"></span> richest people in the world...</h2>
+    <div id="graph_containerPD" class="graph_container">
+        <div class="poorer_position">
+            <span class="material-symbols-outlined poor_arrow">
+                arrow_upward </span>
+            <p class="txt_poorer_position">People poorer than you</p>
+        </div>
+        <div id="income_position_barPD" class="income_position_bar">
+            <div class="your_position">
+                <p class="txt_your_position">You</p>
+                <span class="material-symbols-outlined your_arrow">
+                    arrow_downward
+                </span>
             </div>
+        </div>
+    </div>
+    <h2 class="subject">...and each year, your <span id="txt_amountDon" class="important_txt">€11,136</span> donations<br>
+        (or <span id="txt_amountDonDefisc" class="don_real">€4,800</span> after tax deductions)<br>
+        could:</h2>
+    <div class="container_conseqDon" id="impact">
+        <div class="conseqDon">
+            <div class="imageAction">
+                <img src="https://i.imgur.com/C4WKaGj.png" alt="Mosquito Net Illustration" style="width: 110px; height: auto;">
+            </div>
+            <p class="actionTxt">
+                finance <span id="txt_prixUnitaire_moustiquaire" class="don_real"></span> mosquito nets,<br>and protect<br>
+                <span id="txt_moustiquaire_personnesprotegees" class="don_real info_cle"></span><br>
+                people from malaria<a href="#notes" class="footNote">2</a>.
+            </p>
+        </div>
+    </div>
+    <div class="container_conseqDon" id="impact">
+        <!-- Animals Section -->
+        <div class="conseqDon">
+            <div class="imageAction">
+                <img src="https://imgur.com/rGihi2P.png" alt="Animals Illustration" style="width: 110px; height: auto;">
+            </div>
+            <p class="actionTxt">or, spare<br>
+                <span id="txt_Unitaire_animauxepargne" class="important_txt info_cle"></span><br>
+                animals from factory farming<a href="#notes" class="footNote">3</a>.
+            </p>
+        </div>
+    
+        <!-- Climate Section -->
+        <div class="conseqDon">
+            <div class="imageAction">
+                <img src="https://imgur.com/cnCFiyy.png" alt="Climate Illustration" style="width: 110px; height: auto;">
+            </div>
+            <p class="actionTxt">or even, prevent<br>
+                <span id="txt_Unitaire_CO2" class="important_txt info_cle"></span>
+                <br>
+                tonnes of CO<sub>2</sub>, <br>which equals 
+                <span id="txt_emissionMoy_fce" class="important_txt"></span>
+                times the annual emissions
+                <br>
+                of an average person in France<a href="#notes" class="footNote">4</a>.
+            </p>
+        </div>
+    </div>
 
-        </section>
-        <section class="donner" id="donner">
+</section>
 
-            <h2 class="subject">En donnant <span id="txt_postTaxDonation" class="important_txt">23%</span> de vos revenus, <br>soit <span id="txt_preTaxDonation" class="don_real">10%</span> après réduction d'impôts<a href="#notes" class="footNote">1</a>...</h2>
-            
-            <div id="range_input" class="range_input">
-                <input type="range" name="preTaxSlider" id="preTaxSlider" min="1" max="50" value="10" step="1">
-                <input type="range" name="postTaxSlider" id="postTaxSlider" min="1" max="50" value="5" step="1">
-                <ul class="legend">
-                    <li>1%</li>
-                    <li>10%</li>
-                    <li>20%</li>
-                    <li>30%</li>
-                    <li>40%</li>
-                    <li>50%</li>
-                </ul>
-                <svg role="presentation" width="100%" xmlns="http://www.w3.org/2000/svg">
-                    <rect  x="1.7%" ></rect>
-                    <rect  x="19.4%"></rect>
-                    <rect  x="39%"  ></rect>
-                    <rect  x="58.7%"></rect>
-                    <rect  x="78.6%"></rect>
-                    <rect  x="98.3%"></rect>
-                </svg>
-            </div>
+<section class="callToAction">
+    <h2 class="subject" id="txt_privilegie">
+        Your position in the top <span class="positionPercent"></span>
+        of incomes is an opportunity: <br>
+        you have the power to make a big difference through your donations.
+        <br><br>
+        To understand our estimates, you can consult the detailed pages of the associations on <a href="https://mieuxdonner.org/home/" target="_blank">Mieux Donner.</a>
+    </h2>
+    <div class="containerButton_CTA">
+        <a href="https://www.givingwhatwecan.org/pledge/mieux-donner" class="callToAction_button" target="_blank">
+            Take the Pledge
+        </a>
+        <a href="https://mieuxdonner.org/donate/" class="callToAction_button" target="_top">
+            See Recommended Charities
+        </a>
+    </div>
+</section>
 
-            <h2 class="subject">...vous seriez toujours parmi les <span id="positionPostDon" class="important_txt"></span> les plus riches du monde...</h2>
-            <div id="graph_containerPD" class="graph_container">
-                <div class="poorer_position">
-                    <span class="material-symbols-outlined poor_arrow">
-                        arrow_upward </span>
-                    <p class="txt_poorer_position">Personnes moins riches que vous</p>
-                </div>
-                <div id="income_position_barPD" class="income_position_bar">
-                    <div class="your_position">
-                        <p class="txt_your_position">Vous</p>
-                        <span class="material-symbols-outlined your_arrow">
-                            arrow_downward
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <h2 class="subject">...et chaque année, vos <span id="txt_amountDon" class="important_txt">11 136 €</span> de dons<br>
-                (ou <span id="txt_amountDonDefisc" class="don_real">4 800 €</span> après réduction d'impôts)<br>
-                pourraient :</h2>
-            <div class="container_conseqDon" id="impact">
-                <div class="conseqDon">
-                    <div class="imageAction">
-                        <img src="https://i.imgur.com/C4WKaGj.png" alt="Moustiquaire Illustration" style="width: 110px; height: auto;">
-                    </div>
-                    <p class="actionTxt">
-                        financer <span id="txt_prixUnitaire_moustiquaire" class="don_real"></span> moustiquaires,<br>et ainsi protéger<br>
-                        <span id="txt_moustiquaire_personnesprotegees" class="don_real info_cle"></span><br>
-                        personnes du paludisme<a href="#notes" class="footNote">2</a>
-                    </p>
-                </div>
-            </div>
-            <div class="container_conseqDon" id="impact">
-                <!-- Animals Section -->
-                <div class="conseqDon">
-                    <div class="imageAction">
-                        <img src="https://imgur.com/rGihi2P.png" alt="Animals Illustration" style="width: 110px; height: auto;">
-                    </div>
-                    <p class="actionTxt">ou bien, épargner<br>
-                        <span id="txt_Unitaire_animauxepargne" class="important_txt info_cle"></span><br>
-                        animaux de l'élevage intensif<a href="#notes" class="footNote">3</a>
-                    </p>
-                </div>
-            
-                <!-- Climate Section -->
-                <div class="conseqDon">
-                    <div class="imageAction">
-                        <img src="https://imgur.com/cnCFiyy.png" alt="Climate Illustration" style="width: 110px; height: auto;">
-                    </div>
-                    <p class="actionTxt">ou encore, éviter<br>
-                        <span id="txt_Unitaire_CO2" class="important_txt info_cle"></span>
-                        <br>
-                        tonnes de CO<sub>2</sub>, <br>soit 
-                        <span id="txt_emissionMoy_fce" class="important_txt"></span>
-                        fois les émissions annuelles
-                        <br>
-                        d’une personne en France<a href="#notes" class="footNote">4</a>.
-                    </p>
-                </div>
-            </div>
-
-        </section>
-        <section class="callToAction">
-            <h2 class="subject" id="txt_privilegie">
-                Votre position dans le top <span class="positionPercent"></span>
-                des revenus est une chance : <br>
-                vous avez le pouvoir de faire une grande différence par vos dons.
-                <br><br>
-                Pour comprendre nos estimations, vous pouvez consulter les détails sur les pages des associations sur <a href="https://mieuxdonner.org/" target="_blank">Mieux Donner.</a>
-            </h2>
-            <div class="containerButton_CTA">
-                <a href="https://www.givingwhatwecan.org/fr/pledge/mieux-donner" class="callToAction_button" target="_blank">
-                    Prenez un engagement à donner
-                </a>
-                <a href="https://mieuxdonner.org/donner/" class="callToAction_button" target="_top">
-                    Voir les associations recommandées
-                </a>
-            </div>
-        </section>
 
 <style>
     #notes {
