@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income comparator</title>
+
+    <link rel="stylesheet" href="styles.css"/>
+    <script src="data.js" defer></script>
+    <script src="data_owid.js" defer></script>
+    <script src="main.js" defer></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+</head>
+<body>
+    
+<div id="containerHRAI">
+
+    <section class="banner">
+
+        <h1>Comparateur de revenus</h1>
+    
+    </section>
+    
+    <section class="userSituation" id="userSituation">
+    
+        <h2 class="subject">Vous êtes probablement plus riche que vous ne le pensez - faites le test !</h2>
+    
+        <form id="initialForm">
+            <!-- <div class="income_input_container"> -->
+                <div class="form__group">
+                    
+                    <input 
+                        type="number"
+                        class="form__field"
+                        placeholder=" "
+                        name="income"
+                        id='income'
+                        required
+                        title=""
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                    />
+                    <span class="devise">€</span>
+                    <label for="income" class="form__label">Revenu</label>
+    
+                    
+                    <div class="income_period">
+                        <p>Revenu <span id="container_dropdownperiod"><span id="income_period"></span><span class="material-symbols-outlined arrow_period">
+                            expand_more
+                            </span></span> du ménage avant impôts 
+                            
+                            <span id="anim">
+                                <span class="tooltip" data-tooltip="A inclure : salaires nets avant impôts, retraite, chômage, rentes immobilières, dividendes, intérêts perçus.">?</span>
+                            </span>
+
+                                </p>
+                        <div class="income_period_dropdown" id="income_period_dropdown">
+                            <div>
+                                <input type="radio" id="annuel" name="period" value="annuel" checked>
+                                <label for="annuel" id="annuel_label" class="annuel">annuel</label>
+                            </div>
+                          
+                            <div>
+                                <input type="radio" id="mensuel" name="period" value="mensuel">
+                                <label for="mensuel" id="mensuel_label" class="mensuel">mensuel</label>
+                            </div>
+                        </div>
+                          
+                    </div>
+                </div>
+                <div class="split_form_group">
+                    <div class="relative_famille">
+                        <p class="field_desc">Personnes de 14 ans ou plus</p>
+                        <input
+                            type="number"
+                            class="nb_adult"
+                            placeholder="1"
+                            name="adult"
+                            id='nb_adult'
+                            required
+                            title=""
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                        />
+                        <label for="nb_adult" class="nb_adult_label">Adultes</label>
+                    </div>
+                    <div class="relative_famille">
+                        <p class="field_desc">Personnes de moins de 14 ans</p>
+                        <input
+                            type="number"
+                            class="nb_children"
+                            placeholder="0"
+                            name="children"
+                            id='nb_children'
+                            required
+                            title=""
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                        />
+                        <label for="nb_children" class="nb_children_label">Enfants</label>
+                    </div>
+                </div>
+    
+            <input id="calculer" type="button" value="Calculer">
+    
+        </form>
+        
+    </section>
+
+    <div id="containerApp">
+        <section class="income_position">
+            <h2 class="subject">
+                Avec un revenu de
+                <span id="txt_revenu" class="important_txt">
+                    x€
+                </span>
+                par 
+                <span id="txt_period">
+                    an
+                </span><span id="txt_pourN">
+                    pour 
+                    <span id="txt_nbMenage" class="important_txt">
+                        n</span></span>,
+                <!-- </span> closed on previous line to avoid extra space -->
+                <br>
+                vous êtes parmi les
+                <span class="important_txt positionPercent">
+                    y%
+                </span>
+                les plus riches du monde.
+            </h2>        
+
+            <div id="graph_container" class="graph_container">
+                <div class="poorer_position" id="poorer_position">
+                    <span class="material-symbols-outlined poor_arrow">
+                        arrow_upward
+                    </span>
+                    <p class="txt_poorer_position">
+                        Personnes moins riches que vous
+                    </p>
+                </div>
+                <div id="income_position_bar" class="income_position_bar">
+                    <div class="your_position">
+                        <p class="txt_your_position">Vous</p>
+                        <span class="material-symbols-outlined your_arrow">
+                            arrow_downward
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="median_income">
+
+            <h2 class="subject">Vous gagnez chaque année <span id="timesRevenuMedian" class="important_txt"></span> le revenu médian,<br>
+                et <span id="times10poorest" class="important_txt"></span> le revenu de quelqu’un qui fait partie des 10% les plus pauvres.</h2>
+
+            <div class="compare_GraphContainer">
+
+                <div class="compare_barContainer">
+                    <div id="compare_barYou" class="compare_barYou"></div>
+                    <p class="compare_txt">Votre revenu</p>
+                </div>
+                <div class="compare_barContainer">
+                    <div id="compare_barMedian" class="compare_barMedian"></div>
+                    <p class="compare_txt">Le revenu médian</p>
+                </div>
+                <div class="compare_barContainer">
+                    <div id="compare_barPoor" class="compare_barPoor"></div>
+                    <p class="compare_txt">Le plus haut revenu des 10% les plus pauvres</p>
+                </div>
+
+            </div>
+
+        </section>
+        <section class="donner" id="donner">
+
+            <h2 class="subject">En donnant <span id="txt_postTaxDonation" class="important_txt">23%</span> de vos revenus, <br>soit <span id="txt_preTaxDonation" class="don_real">10%</span> après réduction d'impôts<a href="#notes" class="footNote">1</a>...</h2>
+            
+            <div id="range_input" class="range_input">
+                <input type="range" name="preTaxSlider" id="preTaxSlider" min="1" max="50" value="10" step="1">
+                <input type="range" name="postTaxSlider" id="postTaxSlider" min="1" max="50" value="5" step="1">
+                <ul class="legend">
+                    <li>1%</li>
+                    <li>10%</li>
+                    <li>20%</li>
+                    <li>30%</li>
+                    <li>40%</li>
+                    <li>50%</li>
+                </ul>
+                <svg role="presentation" width="100%" xmlns="http://www.w3.org/2000/svg">
+                    <rect  x="1.7%" ></rect>
+                    <rect  x="19.4%"></rect>
+                    <rect  x="39%"  ></rect>
+                    <rect  x="58.7%"></rect>
+                    <rect  x="78.6%"></rect>
+                    <rect  x="98.3%"></rect>
+                </svg>
+            </div>
+
+            <h2 class="subject">...vous seriez toujours parmi les <span id="positionPostDon" class="important_txt"></span> les plus riches du monde...</h2>
+            <div id="graph_containerPD" class="graph_container">
+                <div class="poorer_position">
+                    <span class="material-symbols-outlined poor_arrow">
+                        arrow_upward </span>
+                    <p class="txt_poorer_position">Personnes moins riches que vous</p>
+                </div>
+                <div id="income_position_barPD" class="income_position_bar">
+                    <div class="your_position">
+                        <p class="txt_your_position">Vous</p>
+                        <span class="material-symbols-outlined your_arrow">
+                            arrow_downward
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <h2 class="subject">...et chaque année, vos <span id="txt_amountDon" class="important_txt">11 136 €</span> de dons<br>
+                (ou <span id="txt_amountDonDefisc" class="don_real">4 800 €</span> après réduction d'impôts)<br>
+                pourraient :</h2>
+            <div class="container_conseqDon" id="impact">
+                <div class="conseqDon">
+                    <div class="imageAction">
+                        <img src="https://i.imgur.com/C4WKaGj.png" alt="Moustiquaire Illustration" style="width: 110px; height: auto;">
+                    </div>
+                    <p class="actionTxt">
+                        financer <span id="txt_prixUnitaire_moustiquaire" class="don_real"></span> moustiquaires,<br>et ainsi protéger<br>
+                        <span id="txt_moustiquaire_personnesprotegees" class="don_real info_cle"></span><br>
+                        personnes du paludisme<a href="#notes" class="footNote">2</a>
+                    </p>
+                </div>
+            </div>
+            <div class="container_conseqDon" id="impact">
+                <!-- Animals Section -->
+                <div class="conseqDon">
+                    <div class="imageAction">
+                        <img src="https://imgur.com/rGihi2P.png" alt="Animals Illustration" style="width: 110px; height: auto;">
+                    </div>
+                    <p class="actionTxt">ou bien, épargner<br>
+                        <span id="txt_Unitaire_animauxepargne" class="important_txt info_cle"></span><br>
+                        animaux de l'élevage intensif<a href="#notes" class="footNote">3</a>
+                    </p>
+                </div>
+            
+                <!-- Climate Section -->
+                <div class="conseqDon">
+                    <div class="imageAction">
+                        <img src="https://imgur.com/cnCFiyy.png" alt="Climate Illustration" style="width: 110px; height: auto;">
+                    </div>
+                    <p class="actionTxt">ou encore, éviter<br>
+                        <span id="txt_Unitaire_CO2" class="important_txt info_cle"></span>
+                        <br>
+                        tonnes de CO<sub>2</sub>, <br>soit 
+                        <span id="txt_emissionMoy_fce" class="important_txt"></span>
+                        fois les émissions annuelles
+                        <br>
+                        d’une personne en France<a href="#notes" class="footNote">4</a>.
+                    </p>
+                </div>
+            </div>
+
+        </section>
+        <section class="callToAction">
+            <h2 class="subject" id="txt_privilegie">
+                Votre position dans le top <span class="positionPercent"></span>
+                des revenus est une chance : <br>
+                vous avez le pouvoir de faire une grande différence par vos dons.
+                <br><br>
+                Pour comprendre nos estimations, vous pouvez consulter les détails sur les pages des associations sur <a href="https://mieuxdonner.org/" target="_blank">Mieux Donner.</a>
+            </h2>
+            <div class="containerButton_CTA">
+                <a href="https://www.givingwhatwecan.org/fr/pledge/mieux-donner" class="callToAction_button" target="_blank">
+                    Prenez un engagement à donner
+                </a>
+                <a href="https://mieuxdonner.org/donner/" class="callToAction_button" target="_top">
+                    Voir les associations recommandées
+                </a>
+            </div>
+        </section>
+
+<style>
+    #notes {
+        margin: 0;
+        padding: 0;
+    }
+
+    #toggleNotes {
+        display: block;
+        margin: 10px auto;
+        padding: 10px;
+        text-align: center;
+    }
+
+    #notesContent {
+        margin: 0 auto;
+        padding: 15px;
+        text-align: left;
+        max-width: 800px; /* Limite la largeur sur les grands écrans */
+        line-height: 1.6; /* Améliore la lisibilité */
+    }
+
+    #notesContent h3 {
+        margin-top: 20px;
+    }
+
+    #notesContent ol {
+        padding-left: 20px;
+        margin-left: 0;
+    }
+
+    #notesContent li {
+        margin-bottom: 10px;
+    }
+
+    /* Ajustement pour les petits écrans */
+    @media (max-width: 768px) {
+        #notesContent {
+            padding: 10px;
+            max-width: 100%; /* Utilise toute la largeur disponible sur téléphone */
+        }
+
+        #toggleNotes {
+            width: 90%; /* Centre le bouton avec une largeur réduite */
+        }
+    }
+</style>
+        
+<section id="notes" style="margin: 0; padding: 0;">
+    <button id="toggleNotes" style="display: block; margin: 10px auto; padding: 10px; text-align: center;">
+        <span class="material-symbols-outlined"> expand_more </span>
+        Notes et méthodologie
+    </button>
+    <div class="panel" id="notesContent" style="margin: 0; padding: 15px; text-align: left;">
+        <h3 style="margin-top: 0;">Notes</h3>
+        <ol style="padding-left: 20px; margin-left: 0;">
+            <li id="note1" style="margin-bottom: 10px;">
+                Certaines associations permettent de réduire une partie des dons de vos impôts sur le revenu. 
+                Les chiffres en jaune correspondent au cas où vous utilisez la réduction fiscale. Les chiffres en bleu ne tiennent pas compte de cet avantage. 
+                Ces chiffres sont des estimations, découvrez-en plus sur la 
+                <a href="https://mieuxdonner.org/reduction-fiscale-des-dons-aux-associations/" target="_blank" rel="noopener noreferrer">réduction fiscale</a>.
+            </li>
+            <li id="note2" style="margin-bottom: 10px;">
+                Selon une estimation de 
+                <a href="https://www.givewell.org/charities/amf#Information_informing_our_cost-effectiveness_analysis" target="_blank" rel="noopener noreferrer">GiveWell</a> (2022), distribuer une moustiquaire contre le paludisme coûte 5$ 
+                (par prudence, nous avons utilisé une conversion de 1:1 entre les dollars et les euros).
+            </li>
+            <li id="note3" style="margin-bottom: 10px;">
+                Selon les 
+                <a href="https://docs.google.com/spreadsheets/d/1xfoqUE82r_dSJb1vqpmB39Ty1YYusUKAw3wbJTILgb8/edit?gid=1114374780#gid=1114374780" target="_blank" rel="noopener noreferrer">calculs d’analyse du rapport coût-efficacité pour les organisations de protection des animaux</a> (FarmKind, consulté le 11/07/2024), 
+                chaque euro donné permettrait d’aider 5,3 animaux. Veuillez noter que ce chiffre est très incertain, et qu'une différence significative est possible. Les détails des hypothèses et des calculs sont disponibles dans leur 
+                <a href="https://docs.google.com/spreadsheets/d/1xfoqUE82r_dSJb1vqpmB39Ty1YYusUKAw3wbJTILgb8/edit?gid=1114374780#gid=1114374780" target="_blank" rel="noopener noreferrer">feuille de calcul</a>. 
+                (Par prudence, nous avons utilisé une conversion de 1 dollar en 1 euro).
+            </li>
+            <li id="note4" style="margin-bottom: 10px;">
+                <a href="https://www.founderspledge.com/research/clean-air-task-force" target="_blank" rel="noopener noreferrer">Un rapport sur le Clean Air Task Force</a> 
+                (Founders Pledge, consulté le 11/07/2024) fournit une analyse conservatrice et réaliste de l’impact attendu des projets futurs dans le cadre de leur 
+                <a href="https://www.founderspledge.com/research/clean-air-task-force" target="_blank" rel="noopener noreferrer">Climate Change Cause Area Report</a>. 
+                Ce rapport est un exemple d’analyse d’impact dans le cadre d’innovations dans des technologies négligées.
+            </li>
+        </ol>
+        <h3 id="vos-données">Vos données</h3>
+        <p>Les données que vous entrez dans ce formulaire ne sont en aucun cas ni enregistrées ni envoyées.</p>
+                    <br/>
+        <h3 id="méthodologie">Méthodologie</h3>
+        <p>Les données sur la distribution mondiale des revenus proviennent de 
+            <a href="https://ourworldindata.org/" target="_blank" rel="noopener noreferrer">Our World In Data</a>. 
+            La <a href="https://ourworldindata.org/economic-inequality" target="_blank" rel="noopener noreferrer">méthodologie</a> utilisée tient compte du niveau de vie de chaque pays et de l'inflation.
+        </p>
+        <p>Deux versions du calculateur de richesse ont été développées. La première se base sur les données de la World Inequality Database et la seconde sur celles de Our World In Data. 
+        Le fait d’utiliser ces deux bases de données induit des différences notables dans les résultats du calculateur. 
+        <a href="https://petalite-ravioli-1dc.notion.site/Diff-rences-entre-version-OWID-WID-11a6e8e6be0380d8abadf5476b7e6b82" target="_blank" rel="noopener noreferrer">Ces différences sont détaillées ici</a>.
+        </p>
+        <p>Dans un ménage de plusieurs personnes, certaines dépenses sont mises en commun. Pour tenir compte de ces économies d'échelles, le revenu du ménage est divisé par un peu moins que le nombre de personnes qui le composent. 
+        Par exemple, pour un ménage de 3 personnes de plus 14 ans, le revenu total est divisé par 2, et non par 3. Le nombre d'<a href="https://www.insee.fr/fr/metadonnees/definition/c1802" target="_blank" rel="noopener noreferrer">unités de consommation</a> du ménage est calculé selon l'échelle d'équivalence de l'OCDE.</p>
+                    <br/>
+        <h3 id="réalisation">Réalisation</h3>
+        <p>Cette page a été réalisée par Clotilde Arléry, inspirée des calculateurs de richesse de 
+            <a href="https://howrichami.givingwhatwecan.org/how-rich-am-i" target="_blank" rel="noopener noreferrer">Giving What We Can</a> et de la 
+            <a href="https://wid.world/income-comparator/" target="_blank" rel="noopener noreferrer">World Inequality Database</a>. 
+            Si vous constatez une erreur ou voulez nous faire un retour, n'hésitez pas à nous contacter.</p>
+    </div>
+</section>
