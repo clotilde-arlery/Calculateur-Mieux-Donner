@@ -17,7 +17,17 @@ let txt_preTaxDonation = document.getElementById("txt_preTaxDonation");
 const CPI_FR_2017 = 106.864453008147;
 const CPI_FR_2022 = 118.258283622798;
 const PPP_CONV_FAC_FR_2017 = 0.847836;
+const isEnglish = window.location.pathname.includes("index-en.html")
 let income_usd_2017;
+
+document.addEventListener("DOMContentLoaded", function() {
+    let annuelLabel = document.getElementById("annuel_label");
+    if (isEnglish && annuelLabel) {
+        annuelLabel.textContent = "yearly";
+    }
+});
+
+
 
 launchButton.addEventListener('click', App);
 initialForm.addEventListener('input', checkLaunchButton);
@@ -67,15 +77,15 @@ if (annuel_radio.checked == true){
     }
 
 function checkIncomePeriod(){
-    if (annuel_radio.checked == true){
-        income_period.innerHTML = "annuel";
-        income_period.style.transition = "0.2s";
-    } 
-    else{
-        income_period.innerHTML = "mensuel";
-        income_period.style.transition = "0.2s";
-    }
+   if (annuel_radio.checked){
+    yearlyIncome = revenu.value;
+    txt_period.innerHTML = isEnglish ? "year" : "an";
 }
+else {
+    yearlyIncome = revenu.value * 12;
+    txt_period.innerHTML = isEnglish ? "month" : "mois";
+}
+
 
 document.getElementById("containerHRAI").addEventListener("change", onChangeReload);
 window.addEventListener('resize', App);
@@ -366,8 +376,11 @@ function App(triggeringEvent){
     let revenuMedian = 6499.6;
     
     let timesRevenuMedian = ajusted_income/revenuMedian;
-    document.getElementById("timesRevenuMedian").innerHTML =
-        formatNumber(timesRevenuMedian) + " fois ";
+document.getElementById("timesRevenuMedian").innerHTML =
+    formatNumber(timesRevenuMedian) + (isEnglish ? " times " : " fois ");
+document.getElementById("times10poorest").innerHTML =
+    formatNumber(times10poorest, roundToUnit=true) + (isEnglish ? " times " : " fois ");
+
 /* global_income_distrib_owid[9]["threshold"] à réécrire */
     let times10poorest = income_usd_2017 / (global_income_distrib_owid[9]["threshold"]*365);
     document.getElementById("times10poorest").innerHTML =
