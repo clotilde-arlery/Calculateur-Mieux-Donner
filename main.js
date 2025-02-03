@@ -17,17 +17,7 @@ let txt_preTaxDonation = document.getElementById("txt_preTaxDonation");
 const CPI_FR_2017 = 106.864453008147;
 const CPI_FR_2022 = 118.258283622798;
 const PPP_CONV_FAC_FR_2017 = 0.847836;
-const isEnglish = window.location.pathname.includes("index-en.html")
 let income_usd_2017;
-
-document.addEventListener("DOMContentLoaded", function() {
-    let annuelLabel = document.getElementById("annuel_label");
-    if (isEnglish && annuelLabel) {
-        annuelLabel.textContent = "yearly";
-    }
-});
-
-
 
 launchButton.addEventListener('click', App);
 initialForm.addEventListener('input', checkLaunchButton);
@@ -69,49 +59,23 @@ function launchIfEnterKeyIsPressed(event){
 }
 
 
-document.addEventListener("DOMContentLoaded", function() {
-    const isEnglish = window.location.pathname.includes("index-en.html");
-    
-    let annuelLabel = document.getElementById("annuel_label");
-    let mensuelLabel = document.getElementById("mensuel_label");
-    let income_period = document.getElementById("income_period");
-    let annuel_radio = document.getElementById("annuel");
-    let mensuel_radio = document.getElementById("mensuel");
-
-    // Set label text for English version only
-    if (isEnglish && annuelLabel) {
-        annuelLabel.textContent = "yearly";
-        mensuelLabel.textContent = "monthly";
+if (annuel_radio.checked == true){
+    income_period.innerHTML = "annuel";
+    } 
+    else{
+        income_period.innerHTML = "mensuel";
     }
-
-    // Ensure "annuel" is selected by default
-    if (annuel_radio && mensuel_radio) {
-        annuel_radio.checked = true;  // Force selection of "annuel"
-        income_period.innerHTML = isEnglish ? "year" : "annuel"; // Update UI
-    }
-
-    // Add event listeners to detect user changes
-    annuel_radio.addEventListener("change", function() {
-        income_period.innerHTML = isEnglish ? "year" : "annuel";
-    });
-
-    mensuel_radio.addEventListener("change", function() {
-        income_period.innerHTML = isEnglish ? "month" : "mensuel";
-    });
-});
-
 
 function checkIncomePeriod(){
-if (annuel_radio.checked){
-    yearlyIncome = revenu.value;
-    txt_period.innerHTML = isEnglish ? "year" : "an";
+    if (annuel_radio.checked == true){
+        income_period.innerHTML = "annuel";
+        income_period.style.transition = "0.2s";
+    } 
+    else{
+        income_period.innerHTML = "mensuel";
+        income_period.style.transition = "0.2s";
+    }
 }
-else {
-    yearlyIncome = revenu.value * 12;
-    txt_period.innerHTML = isEnglish ? "month" : "mois";
-}
-
-
 
 document.getElementById("containerHRAI").addEventListener("change", onChangeReload);
 window.addEventListener('resize', App);
@@ -402,11 +366,8 @@ function App(triggeringEvent){
     let revenuMedian = 6499.6;
     
     let timesRevenuMedian = ajusted_income/revenuMedian;
-document.getElementById("timesRevenuMedian").innerHTML =
-    formatNumber(timesRevenuMedian) + (isEnglish ? " times " : " fois ");
-document.getElementById("times10poorest").innerHTML =
-    formatNumber(times10poorest, roundToUnit=true) + (isEnglish ? " times " : " fois ");
-
+    document.getElementById("timesRevenuMedian").innerHTML =
+        formatNumber(timesRevenuMedian) + " fois ";
 /* global_income_distrib_owid[9]["threshold"] à réécrire */
     let times10poorest = income_usd_2017 / (global_income_distrib_owid[9]["threshold"]*365);
     document.getElementById("times10poorest").innerHTML =
