@@ -490,5 +490,3 @@ function App(triggeringEvent){
         txt_privilegie.style.display = "block";
     }
 }
-
-
