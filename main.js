@@ -69,15 +69,40 @@ function launchIfEnterKeyIsPressed(event){
 }
 
 
-if (annuel_radio.checked == true){
-    income_period.innerHTML = "annuel";
-    } 
-    else{
-        income_period.innerHTML = "mensuel";
+document.addEventListener("DOMContentLoaded", function() {
+    const isEnglish = window.location.pathname.includes("index-en.html");
+    
+    let annuelLabel = document.getElementById("annuel_label");
+    let mensuelLabel = document.getElementById("mensuel_label");
+    let income_period = document.getElementById("income_period");
+    let annuel_radio = document.getElementById("annuel");
+    let mensuel_radio = document.getElementById("mensuel");
+
+    // Set label text for English version only
+    if (isEnglish && annuelLabel) {
+        annuelLabel.textContent = "yearly";
+        mensuelLabel.textContent = "monthly";
     }
 
+    // Ensure "annuel" is selected by default
+    if (annuel_radio && mensuel_radio) {
+        annuel_radio.checked = true;  // Force selection of "annuel"
+        income_period.innerHTML = isEnglish ? "year" : "annuel"; // Update UI
+    }
+
+    // Add event listeners to detect user changes
+    annuel_radio.addEventListener("change", function() {
+        income_period.innerHTML = isEnglish ? "year" : "annuel";
+    });
+
+    mensuel_radio.addEventListener("change", function() {
+        income_period.innerHTML = isEnglish ? "month" : "mensuel";
+    });
+});
+
+
 function checkIncomePeriod(){
-   if (annuel_radio.checked){
+if (annuel_radio.checked){
     yearlyIncome = revenu.value;
     txt_period.innerHTML = isEnglish ? "year" : "an";
 }
@@ -85,6 +110,7 @@ else {
     yearlyIncome = revenu.value * 12;
     txt_period.innerHTML = isEnglish ? "month" : "mois";
 }
+
 
 
 document.getElementById("containerHRAI").addEventListener("change", onChangeReload);
