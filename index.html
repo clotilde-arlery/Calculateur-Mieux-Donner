@@ -16,6 +16,17 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 
 </head>
+
+    <script>
+    function sendHeightToParent() {
+        const height = document.body.scrollHeight;
+        window.parent.postMessage({ height: height }, "*"); 
+    }
+
+    window.onload = sendHeightToParent;
+    window.addEventListener("resize", sendHeightToParent);
+</script>
+
 <body>
     
   <!--   <div id="containerHRAI">
