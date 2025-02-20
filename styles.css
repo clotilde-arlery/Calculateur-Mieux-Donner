@@ -530,6 +530,12 @@ input[type="range"]::-moz-range-track {
   );
 }
 
+input[type="text"],
+input[type="number"] {
+    background-color: #FFFCF7 !important;
+    color: #000; /* Ensure the text remains visible */
+}
+
 /***** Thumb Styles *****/
 /***** Chrome, Safari, Opera, and Edge Chromium *****/
 input[type="range"]::-webkit-slider-thumb {
