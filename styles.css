@@ -41,7 +41,7 @@ body{
 }
 #containerApp{
     display: none;
-    background-color : #fff;
+    background-color : #fffcf7;
 }
 .important_txt{
     color: var(--third);
@@ -52,7 +52,7 @@ body{
     font-weight: 500;
 }
 .banner{
-    color: #fff;
+    color: #fffcf7;
     /* width: 100%; */
     padding: 60px 0px;
     text-align: center;
@@ -134,7 +134,7 @@ input[type="button"]#calculer {
     background-color: var(--secondary);
     cursor: pointer;
 
-    color: #fff;
+    color: #fffcf7;
     margin-top: 60px;
     margin-bottom: 20px;
     font-size: 18px;
@@ -210,7 +210,7 @@ input[type="button"]#calculer:not(:disabled):hover {
 
 .tooltip {
   position: relative;
-  background: #fff;
+  background: #fffcf7;
   border: 2px solid #767676;
   padding: 0px 5px;
   width: min-content;
@@ -237,7 +237,7 @@ input[type="button"]#calculer:not(:disabled):hover {
 .tooltip:before {
   border-width: 10px 8px 0 8px;
   border-style: solid;
-  border-color: #fff transparent transparent transparent;
+  border-color: #fffcf7 transparent transparent transparent;
   top: -15px;  
   z-index: 10;
 }
@@ -245,7 +245,7 @@ input[type="button"]#calculer:not(:disabled):hover {
 .tooltip:after {
   content: attr(data-tooltip);
   color: #333;
-  background: #fff;
+  background: #fffcf7;
   width: 150px;  
   height: 100px;
   font-size: 13px;
@@ -689,7 +689,7 @@ input[type="range"]:active::-moz-range-thumb {
     text-decoration: none;
     margin-top: 20px;
     background-color: var(--primary);
-    color: #fff;
+    color: #fffcf7;
     font-size: 18px;
     border-color: transparent;
     padding: 7px 30px 7px 30px;
@@ -707,7 +707,7 @@ button#toggleNotes {
     align-items: baseline;
 	font-size : 18px;
   font-weight : bold;
-  background-color: #fff;
+  background-color: #fffcf7;
   color: #767676;
   cursor: pointer;
   padding: 18px;
@@ -723,7 +723,7 @@ section#notes > div#notesContent {
   line-height: 1.5;
   text-align: justify;
   font-size: 14px;
-  background-color: #fff;
+  background-color: #fffcf7;
   display: block;
   overflow: hidden;
   color: #767676;
