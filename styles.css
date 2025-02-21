@@ -108,13 +108,10 @@ section.income_position > h2.subject {
     transform: translate(44px, 0px);
     visibility: hidden;
 }
-#annuel{
-    visibility: hidden;
+#annuel, #mensuel {
+    visibility: visible !important;
+}
 
-}
-#mensuel{
-    visibility: hidden;
-}
 .arrow_period{
     transform: translateY(8px);
 }
