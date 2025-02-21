@@ -22,11 +22,11 @@ body {
     --primary-transparent: #314250c8;
     --primary-lighter: #4D7751;
 
-    --third: #4D7751;
-    --third-transparent: #4d7751a7;
+    --third: #4ca061;
+    --third-transparent: #4ca061a7;
 
-    --secondary: #B45E4C;
-    --secondary-transparent: #b45d4cb3;
+    --secondary: #d74b35;
+    --secondary-transparent: #d74b35b3;
 }
 
 /* Firefox */
