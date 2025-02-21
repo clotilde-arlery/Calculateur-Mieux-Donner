@@ -77,9 +77,6 @@ function checkIncomePeriod(){
     }
 }
 
-document.getElementById("annuel").addEventListener("change", checkIncomePeriod);
-document.getElementById("mensuel").addEventListener("change", checkIncomePeriod);
-
 document.getElementById("containerHRAI").addEventListener("change", onChangeReload);
 window.addEventListener('resize', App);
 
