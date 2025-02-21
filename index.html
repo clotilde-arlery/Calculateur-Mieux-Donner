@@ -33,79 +33,73 @@
     <em>Les résultats ci-dessous tiennent compte du coût de la vie en France. Il s'agit d'une comparaison en pouvoir d'achat, et non en richesse relative. Pour une comparaison depuis un autre pays, utilisez <a href="https://www.givingwhatwecan.org/how-rich-am-i" target="_blank" style="color: #314250;">ce comparateur</a>.</em>
 </h2>
 
-        <form id="initialForm">
-            <!-- <div class="income_input_container"> -->
-                <div class="form__group">
-                    
-                    <input 
-                        type="number"
-                        class="form__field"
-                        placeholder=" "
-                        name="income"
-                        id='income'
-                        required
-                        title=""
-                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                    />
-                    <span class="devise">€</span>
-                    <label for="income" class="form__label">Revenu</label>
-    
-                    
-                    <div class="income_period">
-                        <p>Revenu <span id="container_dropdownperiod"><span id="income_period"></span><span class="material-symbols-outlined arrow_period">
-                            expand_more
-                            </span></span> du ménage avant impôts 
-                            
-                            <span id="anim">
-                                <span class="tooltip" data-tooltip="A inclure : salaires nets avant impôts, retraite, chômage, rentes immobilières, dividendes, intérêts perçus.">?</span>
-                            </span>
+    <form id="initialForm">
+        <div class="form__group">
+            <input 
+                type="number"
+                class="form__field"
+                placeholder=" "
+                name="income"
+                id="income"
+                required
+                title=""
+                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+            />
+            <span class="devise">€</span>
+            <label for="income" class="form__label">Income</label>
 
-                                </p>
-                        <div class="income_period_dropdown" id="income_period_dropdown"> 
-                            <div>
+            <div class="income_period">
+                <p>Household income <span id="container_dropdownperiod"><span id="income_period"></span><span class="material-symbols-outlined arrow_period">
+                    expand_more
+                    </span></span> before taxes
+                    <span id="anim">
+                        <span class="tooltip" data-tooltip="Include: net salaries before taxes, pensions, unemployment benefits, rental income, dividends, received interests.">?</span>
+                    </span>
+                </p>
+                <div class="income_period_dropdown" id="income_period_dropdown">
+                    <div>
                         <input type="radio" id="annuel" name="period" value="annuel" checked>
-                        <label for="annuel" id="annuel_label" class="annuel">annuel</label>
+                        <label for="annuel" id="annuel_label" class="annuel">yearly</label>
                     </div>
                     <div>
                         <input type="radio" id="mensuel" name="period" value="mensuel">
-                        <label for="mensuel" id="mensuel_label" class="mensuel">mensuel</label>
-                            </div>
-                        </div>
-                          
+                        <label for="mensuel" id="mensuel_label" class="mensuel">monthly</label>
                     </div>
                 </div>
-                <div class="split_form_group">
-                    <div class="relative_famille">
-                        <p class="field_desc">Personnes de 14 ans ou plus</p>
-                        <input
-                            type="number"
-                            class="nb_adult"
-                            placeholder="1"
-                            name="adult"
-                            id='nb_adult'
-                            required
-                            title=""
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                        />
-                        <label for="nb_adult" class="nb_adult_label">Adultes</label>
-                    </div>
-                    <div class="relative_famille">
-                        <p class="field_desc">Personnes de moins de 14 ans</p>
-                        <input
-                            type="number"
-                            class="nb_children"
-                            placeholder="0"
-                            name="children"
-                            id='nb_children'
-                            required
-                            title=""
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                        />
-                        <label for="nb_children" class="nb_children_label">Enfants</label>
-                    </div>
-                </div>
-    
-            <input id="calculer" type="button" value="Calculer">
+            </div>
+        </div>
+        <div class="split_form_group">
+            <div class="relative_famille">
+                <p class="field_desc">People aged 14 and over</p>
+                <input
+                    type="number"
+                    class="nb_adult"
+                    placeholder="1"
+                    name="adult"
+                    id="nb_adult"
+                    required
+                    title=""
+                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                />
+                <label for="nb_adult" class="nb_adult_label">Adults</label>
+            </div>
+            <div class="relative_famille">
+                <p class="field_desc">People under 14</p>
+                <input
+                    type="number"
+                    class="nb_children"
+                    placeholder="0"
+                    name="children"
+                    id="nb_children"
+                    required
+                    title=""
+                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                />
+                <label for="nb_children" class="nb_children_label">Children</label>
+            </div>
+        </div>
+
+        <input id="calculer" type="button" value="Calculate">
     
         </form>
         
