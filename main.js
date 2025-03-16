@@ -59,11 +59,25 @@ function launchIfEnterKeyIsPressed(event){
 }
 
 
-income_period.innerHTML = "mensuel"; // Always set to "mensuel"
+if (annuel_radio.checked == true){
+    income_period.innerHTML = "annuel";
+} 
+else{
+    income_period.innerHTML = "mensuel";
+}
+
 
 function checkIncomePeriod(){
-    income_period.innerHTML = "mensuel"; // Force "mensuel"
+    if (annuel_radio.checked == true){
+        income_period.innerHTML = "annuel";
+        income_period.style.transition = "0.2s";
+    } 
+    else{
+        income_period.innerHTML = "mensuel";
+        income_period.style.transition = "0.2s";
+    }
 }
+
 
 document.getElementById("containerHRAI").addEventListener("change", onChangeReload);
 window.addEventListener('resize', App);
