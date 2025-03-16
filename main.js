@@ -59,22 +59,10 @@ function launchIfEnterKeyIsPressed(event){
 }
 
 
-if (annuel_radio.checked == true){
-    income_period.innerHTML = "annuel";
-    } 
-    else{
-        income_period.innerHTML = "mensuel";
-    }
+income_period.innerHTML = "mensuel"; // Always set to "mensuel"
 
 function checkIncomePeriod(){
-    if (annuel_radio.checked == true){
-        income_period.innerHTML = "annuel";
-        income_period.style.transition = "0.2s";
-    } 
-    else{
-        income_period.innerHTML = "mensuel";
-        income_period.style.transition = "0.2s";
-    }
+    income_period.innerHTML = "mensuel"; // Force "mensuel"
 }
 
 document.getElementById("containerHRAI").addEventListener("change", onChangeReload);
