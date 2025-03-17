@@ -543,6 +543,15 @@ input[type="number"] {
     color: #000; /* Ensure the text remains visible */
 }
 
+.income_period_dropdown {
+    display: none !important;
+}
+
+.arrow_period {
+    display: none !important;
+}
+
+
 /***** Thumb Styles *****/
 /***** Chrome, Safari, Opera, and Edge Chromium *****/
 input[type="range"]::-webkit-slider-thumb {
