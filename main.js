@@ -270,7 +270,7 @@ function getPercentile(income) {
     for (let i = 0; i < global_income_distrib_owid.length; i++) {
         if (income < global_income_distrib_owid[i]['threshold'] * 365) {
             upperThreshold = global_income_distrib_owid[i];
-            lowerThreshold = global_income_distrib_owid[i - 1] || null;
+            lowerThreshold = global_income_distrib_owid[i] || null;
             break;
         }
     }
