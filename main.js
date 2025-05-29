@@ -262,7 +262,13 @@ function getDonationPreTax(income, donationPostTax, nParts){
 
 
 function getPercentile(income) {
-    let percentile = 100; // Default to the highest percentile
+    let percentile = 100; // Default to the highest percentile (poorest)
+
+    // If income is very low (e.g., 0), it should fall into the 100th percentile (poorest).
+    if (income <= 0) {
+        return percentile; // Return the 100th percentile
+    }
+
     let lowerThreshold = null;
     let upperThreshold = null;
 
@@ -270,14 +276,14 @@ function getPercentile(income) {
     for (let i = 0; i < global_income_distrib_owid.length; i++) {
         if (income < global_income_distrib_owid[i]['threshold'] * 365) {
             upperThreshold = global_income_distrib_owid[i];
-            lowerThreshold = global_income_distrib_owid[i] || null;
+            lowerThreshold = global_income_distrib_owid[i - 1] || null;
             break;
         }
     }
 
-    // If no match is found, assume the highest percentile
+    // If no match is found, assume the highest percentile (i.e., 99.9th percentile)
     if (!upperThreshold) {
-        percentile = 99.9; // Highest possible percentile
+        percentile = 99.9;
     } else {
         // If both thresholds are found, use linear interpolation
         if (lowerThreshold) {
@@ -295,6 +301,7 @@ function getPercentile(income) {
 
     return percentile;
 }
+
 
 
 
