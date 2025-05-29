@@ -261,19 +261,41 @@ function getDonationPreTax(income, donationPostTax, nParts){
 }
 
 
-function getPercentile(income){
-    for (var i = 0; i < global_income_distrib_owid.length; i++){
-        // thresholds represents daily incomes in international 2017 dollars. That's why we multiply by 365 
-            if (income < global_income_distrib_owid[i]['threshold']*365){
-                percentile = i;
-                break;
-            }
-            else {
-                percentile = 99.9;
-            }
+function getPercentile(income) {
+    let percentile = 100; // Default to the highest percentile
+    let lowerThreshold = null;
+    let upperThreshold = null;
+
+    // Find the two nearest thresholds: one below and one above the given income
+    for (let i = 0; i < global_income_distrib_owid.length; i++) {
+        if (income < global_income_distrib_owid[i]['threshold'] * 365) {
+            upperThreshold = global_income_distrib_owid[i];
+            lowerThreshold = global_income_distrib_owid[i - 1] || null;
+            break;
         }
+    }
+
+    // If no match is found, assume the highest percentile
+    if (!upperThreshold) {
+        percentile = 99.9; // Highest possible percentile
+    } else {
+        // If both thresholds are found, use linear interpolation
+        if (lowerThreshold) {
+            let lowerThresholdValue = lowerThreshold['threshold'] * 365;
+            let upperThresholdValue = upperThreshold['threshold'] * 365;
+
+            // Calculate percentile using interpolation between the two thresholds
+            let interpolationFactor = (income - lowerThresholdValue) / (upperThresholdValue - lowerThresholdValue);
+            percentile = lowerThreshold.percentile + (upperThreshold.percentile - lowerThreshold.percentile) * interpolationFactor;
+        } else {
+            // If no lower threshold exists, return the first available percentile (e.g., 1st percentile)
+            percentile = upperThreshold.percentile;
+        }
+    }
+
     return percentile;
 }
+
 
 
 /* Main App function */
