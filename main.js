@@ -283,7 +283,7 @@ function getPercentile(income) {
 
     // If no match is found, assume the highest percentile (i.e., 99.9th percentile)
     if (!upperThreshold) {
-        percentile = 99.9;
+        percentile = 99;
     } else {
         // If both thresholds are found, use linear interpolation
         if (lowerThreshold) {
